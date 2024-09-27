@@ -1,6 +1,7 @@
-﻿using TurkiyeSporSisemi.ConsoleUI.Repository;
+﻿using TurkiyeSporSisemi.ConsoleUI.Models;
+using TurkiyeSporSisemi.ConsoleUI.Repository.Concrete;
+using TurkiyeSporSisemi.ConsoleUI.Service;
 
-Console.WriteLine("Hello, World!");
-BaseRepository baseRepository = new BaseRepository();
+PlayerService playerService = new PlayerService();
+Console.WriteLine(playerService.GetById(100));
 
- var teams = BaseRepository.Teams.ToList();

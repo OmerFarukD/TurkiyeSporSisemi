@@ -13,4 +13,8 @@ public class Player : Entity<int>
     public double MarketValue { get; set; }
 
     public Guid TeamId { get; set; }
+    public override string ToString()
+    {
+        return $"{Name}, {Surname}";
+    }
 }

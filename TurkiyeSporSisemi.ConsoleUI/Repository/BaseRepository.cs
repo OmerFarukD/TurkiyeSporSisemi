@@ -7,12 +7,9 @@ using TurkiyeSporSisemi.ConsoleUI.Models;
 
 namespace TurkiyeSporSisemi.ConsoleUI.Repository
 {
-    public  class BaseRepository
+    public static class BaseRepository
     {
-        private BaseRepository()
-        {
-            
-        }
+
 
         public static List<Team> Teams = new List<Team>()
         {
