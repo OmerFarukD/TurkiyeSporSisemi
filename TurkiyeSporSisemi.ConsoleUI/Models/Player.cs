@@ -11,4 +11,6 @@ public class Player : Entity<int>
     public string Branch { get; set; }
 
     public double MarketValue { get; set; }
+
+    public Guid TeamId { get; set; }
 }
