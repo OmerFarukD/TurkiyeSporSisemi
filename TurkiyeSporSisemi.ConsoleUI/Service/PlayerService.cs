@@ -27,13 +27,7 @@ public class PlayerService : IPlayerService
         }
         catch (NotFoundException ex)
         {
-            return new ReturnModel<Player>
-            {
-                Success = false,
-                Message = ex.Message,
-                Data = null,
-                StatusCode = System.Net.HttpStatusCode.NotFound
-            };
+          return ReturnModelOfException(ex);
         }
 
     }
