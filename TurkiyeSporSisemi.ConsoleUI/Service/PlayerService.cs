@@ -16,6 +16,7 @@ public class PlayerService : IPlayerService
     {
         try
         {
+           
             Player player = playerRepository.GetById(id);
             return new ReturnModel<Player>
             {
@@ -42,12 +43,7 @@ public class PlayerService : IPlayerService
 
         try
         {
-            if (updated.Name.Length < 1)
-            {
-                Console.WriteLine("1");
-                throw new ValidationException("Oyuncu ismi minimum 1 karakterli olmalıdır.");
-            }
-
+            CheckPlayerName(updated.Name);
             Player player = playerRepository.Update(id, updated);
 
             return new ReturnModel<Player>
@@ -55,28 +51,63 @@ public class PlayerService : IPlayerService
                 Data= player,
                 Message = "Oyuncu güncellendi",
                 Success = true,
-                StatusCode = System.Net.HttpStatusCode.OK
+                StatusCode =HttpStatusCode.OK
             };
         }    
         catch (NotFoundException ex) 
         {
-            return ReturnModelOfException(ex,HttpStatusCode.NotFound);
+            return ReturnModelOfException(ex);
         }
         catch (ValidationException ex)
         {
-            return ReturnModelOfException(ex,HttpStatusCode.BadRequest);
+            return ReturnModelOfException(ex);
         }
     }
 
 
-    private ReturnModel<Player> ReturnModelOfException(Exception ex,HttpStatusCode code)
+    private void CheckPlayerName(string name)
     {
+        if (name.Length < 1)
+        {
+            throw new ValidationException("Oyuncu ismi minimum 1 karakterli olmalıdır.");
+        }
+    }
+
+    private ReturnModel<Player> ReturnModelOfException(Exception ex)
+    {
+        if(ex.GetType()== typeof(NotFoundException))
+        {
+            return new ReturnModel<Player>
+            {
+                Data = null,
+                Message = ex.Message,
+                Success = false,
+                StatusCode = HttpStatusCode.NotFound
+            };
+        }
+
+        if(ex.GetType()== typeof(ValidationException))
+        {
+            return new ReturnModel<Player>
+            {
+                Data = null,
+                Message = ex.Message,
+                Success = false,
+                StatusCode = HttpStatusCode.BadRequest
+            };
+        }
+
+
         return new ReturnModel<Player>
         {
             Data = null,
             Message = ex.Message,
             Success = false,
-            StatusCode = code
+            StatusCode = HttpStatusCode.InternalServerError
         };
+
+
+
+       
     }
 }
