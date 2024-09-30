@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TurkiyeSporSisemi.ConsoleUI.Exceptions;
 using TurkiyeSporSisemi.ConsoleUI.Models;
 using TurkiyeSporSisemi.ConsoleUI.Repository.Abstracts;
 
@@ -39,12 +40,10 @@ namespace TurkiyeSporSisemi.ConsoleUI.Repository.Concrete
             if (player is null)
             {
 
-                throw new Exception($"Aradığınız Id ye göre Oyuncu bulunamadı : {id}");
+                throw new NotFoundException($"Aradığınız Id ye göre Oyuncu bulunamadı : {id}");
             }
             return player;
         }
-
-        //  1 , 2 3 , 4 , 5 , 6
         public Player? Update(int id, Player entity)
         {
             Player? player = GetById(id);
@@ -53,7 +52,7 @@ namespace TurkiyeSporSisemi.ConsoleUI.Repository.Concrete
 
             BaseRepository.Players.Insert(index, entity);
          
-            return player;
+            return entity;
         }
     }
 }
