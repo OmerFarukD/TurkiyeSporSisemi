@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 using TurkiyeSporSisemi.ConsoleUI.Exceptions;
 using TurkiyeSporSisemi.ConsoleUI.Models;
 using TurkiyeSporSisemi.ConsoleUI.Models.ReturnModels;
@@ -56,28 +57,26 @@ public class PlayerService : IPlayerService
                 Success = true,
                 StatusCode = System.Net.HttpStatusCode.OK
             };
-        }
-
-      
+        }    
         catch (NotFoundException ex) 
         {
-            return new ReturnModel<Player>
-            {
-                Data = null,
-                Message = ex.Message,
-                Success = false,
-                StatusCode = System.Net.HttpStatusCode.NotFound
-            };
+            return ReturnModelOfException(ex,HttpStatusCode.NotFound);
         }
         catch (ValidationException ex)
         {
-            return new ReturnModel<Player>
-            {
-                Data = null,
-                Message = ex.Message,
-                Success = false,
-                StatusCode = System.Net.HttpStatusCode.BadRequest
-            };
+            return ReturnModelOfException(ex,HttpStatusCode.BadRequest);
         }
+    }
+
+
+    private ReturnModel<Player> ReturnModelOfException(Exception ex,HttpStatusCode code)
+    {
+        return new ReturnModel<Player>
+        {
+            Data = null,
+            Message = ex.Message,
+            Success = false,
+            StatusCode = code
+        };
     }
 }
