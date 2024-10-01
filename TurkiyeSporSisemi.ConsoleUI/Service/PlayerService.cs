@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 using System.Net;
 using TurkiyeSporSisemi.ConsoleUI.Exceptions;
 using TurkiyeSporSisemi.ConsoleUI.Models;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TurkiyeSporSisemi.ConsoleUI.Models;
+using TurkiyeSporSisemi.ConsoleUI.Models.Enums;
 
 namespace TurkiyeSporSisemi.ConsoleUI.Repository
 {
@@ -36,7 +37,8 @@ namespace TurkiyeSporSisemi.ConsoleUI.Repository
                 Id = 1,
                 Name="Okay",
                 Surname = "Yokuşlu",
-                Branch = "Futbol",
+                Branch = Branch.Futbol,
+                Gender = Gender.Male,
                 MarketValue = 1000000,
                 Number = "5",
                 Position = "Defansif Orta Saha",
@@ -47,7 +49,8 @@ namespace TurkiyeSporSisemi.ConsoleUI.Repository
                 Id= 2,
                 Name = "Atilla",
                 Surname = "Karaoğlan",
-                Branch = "Futbol",
+                Branch = Branch.Futbol,
+                Gender = Gender.Male,
                 MarketValue = 100000,
                 Number = "99",
                 Position = "Forvet",
